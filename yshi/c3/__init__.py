@@ -30,7 +30,7 @@ class 不一致的層次結構(Exception):
 
 
 def 私人是不是头(候选, 非空序列列表):
-    return bool([序列 for 序列 in 非空序列列表 if 候选 in 序列[1:]])
+    return 布爾([序列 for 序列 in 非空序列列表 if 候选 in 序列[1:]])
     for 序列 in 非空序列列表:
         if 候选 in 序列[1:]:
             return 真
