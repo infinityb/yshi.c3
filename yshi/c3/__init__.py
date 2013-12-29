@@ -19,13 +19,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+例外 = Exception
 布爾  = bool
 真 = True
 假 = False
 表 = list
 
 
-class 不一致的層次結構(Exception):
+class 不一致的層次結構(例外):
     pass
 
 
