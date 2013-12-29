@@ -19,8 +19,9 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+
 import unittest
-from yshi.c3 import InconsistentHierarchy, linearize
+from yshi.c3 import 不一致的層次結構, 線性
 
 
 class_parent_func = lambda x: x.__bases__
@@ -40,8 +41,8 @@ class C3LinearizationTest(unittest.TestCase):
             'B': ['Y', 'X'],
             'Z': ['A', 'B']
         }
-        with self.assertRaises(InconsistentHierarchy):
-            linearize(dict_parent_func(parent_dict), 'Z')
+        with self.assertRaises(不一致的層次結構):
+            線性(parent_dict.get, 'Z')
 
     def test_example_one(self):
         """My first example"""
@@ -55,11 +56,11 @@ class C3LinearizationTest(unittest.TestCase):
             'A': ['B', 'C']
         }
         self.assertEqual(
-            linearize(dict_parent_func(parent_dict), 'A'),
+            線性(parent_dict.get, 'A'),
             ['A', 'B', 'C', 'D', 'E', 'F', 'O']
         )
         self.assertEqual(
-            linearize(dict_parent_func(parent_dict), 'B'),
+            線性(parent_dict.get, 'B'),
             ['B', 'D', 'E', 'O']
         )
 
@@ -75,15 +76,15 @@ class C3LinearizationTest(unittest.TestCase):
             'A': ['B', 'C']
         }
         self.assertEqual(
-            linearize(dict_parent_func(parent_dict), 'C'),
+            線性(parent_dict.get, 'C'),
             ['C', 'D', 'F', 'O']
         )
         self.assertEqual(
-            linearize(dict_parent_func(parent_dict), 'B'),
+            線性(parent_dict.get, 'B'),
             ['B', 'E', 'D', 'O']
         )
         self.assertEqual(
-            linearize(dict_parent_func(parent_dict), 'A'),
+            線性(parent_dict.get, 'A'),
             ['A', 'B', 'E', 'C', 'D', 'F', 'O']
         )
 
@@ -101,19 +102,19 @@ class C3LinearizationTest(unittest.TestCase):
             'Z': ['K1', 'K2', 'K3']
         }
         self.assertEqual(
-            linearize(dict_parent_func(parent_dict), 'K1'),
+            線性(parent_dict.get, 'K1'),
             ['K1', 'A', 'B', 'C', 'O']
         )
         self.assertEqual(
-            linearize(dict_parent_func(parent_dict), 'K2'),
+            線性(parent_dict.get, 'K2'),
             ['K2', 'D', 'B', 'E', 'O']
         )
         self.assertEqual(
-            linearize(dict_parent_func(parent_dict), 'K3'),
+            線性(parent_dict.get, 'K3'),
             ['K3', 'D', 'A', 'O']
         )
         self.assertEqual(
-            linearize(dict_parent_func(parent_dict), 'Z'),
+            線性(parent_dict.get, 'Z'),
             ['Z', 'K1', 'K2', 'K3', 'D', 'A', 'B', 'C', 'E', 'O']
         )
 

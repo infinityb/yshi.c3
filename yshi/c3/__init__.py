@@ -19,48 +19,46 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+布爾  = bool
+真 = True
+假 = False
+表 = list
 
 
-class InconsistentHierarchy(Exception):
+class 不一致的層次結構(Exception):
     pass
 
 
-def _nothead(cand, nonemptyseqs):
-    return bool([s for s in nonemptyseqs if cand in s[1:]])
-    for s in nonemptyseqs:
-        if cand in s[1:]:
-            return True
+def 私人是不是头(候选, 非空序列列表):
+    return bool([序列 for 序列 in 非空序列列表 if 候选 in 序列[1:]])
+    for 序列 in 非空序列列表:
+        if 候选 in 序列[1:]:
+            return 真
     else:
-        return False
+        return 假
 
 
-def _merge(seqs):
-    res = []
-    while True:
-        nonemptyseqs = [seq for seq in seqs if seq]
-        if not nonemptyseqs:
-            return res
-        for seq in nonemptyseqs:
-            if not _nothead(seq[0], nonemptyseqs):
-                cand = seq[0]
+def 私人合併(序列列表):
+    结果 = []
+    while 真:
+        非空序列列表 = [序列 for 序列 in 序列列表 if 序列]
+        if not 非空序列列表:
+            return 结果
+        for 序列 in 非空序列列表:
+            if not 私人是不是头(序列[0], 非空序列列表):
+                候选 = 序列[0]
                 break
         else:
-            raise InconsistentHierarchy()
-        res.append(cand)
-        for seq in nonemptyseqs:
-            if seq[0] == cand:
-                del seq[0]
+            raise 不一致的層次結構()
+        结果.append(候选)
+        for 序列 in 非空序列列表:
+            if 序列[0] == 候选:
+                del 序列[0]
 
 
-def _returns_list(func):
-    def decorated(*args, **kwargs):
-        return list(func(*args, **kwargs))
-    return decorated
-
-
-def linearize(parent_getter, obj):
-    return _merge(
-        [[obj]] +
-        [linearize(parent_getter, parent) for parent in parent_getter(obj)] +
-        [list(parent_getter(obj))]
+def 線性(父消氣, 物體):  # 振奮的性別歧視
+    return 私人合併(
+        [[物體]] +
+        [線性(父消氣, 親) for 親 in 父消氣(物體)] +
+        [表(父消氣(物體))]
     )
